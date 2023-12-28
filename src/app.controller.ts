@@ -15,7 +15,7 @@ export class AppController {
   }
   @Get("signature")
   getSignature() {
-    return { signature: this.appService.getSignature() };
+    return { accountId: process.env.ACCOUNT_ID, key: process.env.API_KEY, signature: this.appService.getSignature() };
   }
 
   @Get("auth/ping")
