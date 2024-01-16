@@ -37,6 +37,10 @@ export class AppController {
   createPaylink(@Body() body: any) {
     return this.appService.createPayLink(body);
   }
+  @Post("eft/fund")
+  eftFund(@Body() body: any) {
+    return this.appService.eftFund(body);
+  }
   @Post("account/transactions")
   getAccountTransactions(@Body() body: any) {
     return this.appService.getAccountTransactions(body);

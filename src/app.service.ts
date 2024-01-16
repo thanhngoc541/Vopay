@@ -107,4 +107,35 @@ export class AppService {
     );
     return data;
   }
+  async eftFund(body) {
+    const form = new FormData();
+    form.append('AccountID', process.env.ACCOUNT_ID);
+    form.append('Key', process.env.API_KEY);
+    form.append('Signature', this.getSignature());
+    form.append('FirstName', body.firstName);
+    form.append('LastName', body.lastName);
+    form.append('CompanyName', body.companyName);
+    form.append('Address1', body.address1);
+    form.append('City', body.city);
+    form.append('Province', body.province);
+    form.append('Country', body.country);
+    form.append('PostalCode', body.postalCode);
+    form.append('AccountNumber', body.accountNumber);
+    form.append('FinancialInstitutionNumber', body.financialInstitutionNumber);
+    form.append('BranchTransitNumber', body.branchTransitNumber);
+    form.append('Amount', body.amount);
+    form.append('Currency', body.currency);
+
+    const { data } = await firstValueFrom(
+      this.httpService
+        .post('https://earthnode-dev.vopay.com/api/v2/eft/fund',
+          form
+        ).pipe(
+          catchError((error: AxiosError) => {
+            throw 'An error happened!';
+          }),
+        ),
+    );
+    return data;
+  }
 }
