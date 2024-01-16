@@ -94,6 +94,7 @@ export class AppService {
     form.append('PaymentType', body.paymentType);
     form.append('Amount', body.amount);
     form.append('ReceiverEmailAddress', body.receiverEmailAddress);
+    form.append('SendEmail', "true");
     const { data } = await firstValueFrom(
       this.httpService
         .post('https://earthnode-dev.vopay.com/api/v2/paylink',
